@@ -1,0 +1,66 @@
+
+#include<iostream>
+using namespace std;
+class stack {
+private:
+	int top, capacity;
+	int* arr;
+public:
+	stack(int size) :top(-1), capacity(size) { arr = new int[capacity]; }
+	
+	void push(int value) {
+		if (top == capacity - 1) {
+			cout << "Error: stack overflow." << endl;
+		}
+		else
+		{
+			arr[++top] = value;
+		}
+			
+		
+	}
+	int pop() {
+		int value;
+		if (top == -1) {
+			cout << "Error: stack underflow." << endl;
+		}
+		else
+		{
+			value = arr[top--];
+			return value;
+		}
+			
+
+	}
+	void display() {
+		if (top==-1)
+		{
+			cout << "Error: stack underflow." << endl;
+		}
+		else
+		{
+			for (int i = top; i > -1; --i) {
+				cout << arr[i] << "\t";
+			}
+			cout << endl;
+		}
+	}
+	~stack() {
+		delete[] arr;
+	}
+};
+int main() {
+	
+	stack st(10);
+	st.push(167);
+	st.push(52);
+	st.push(94);
+	st.push(866);
+	st.push(567);
+	
+	st.display();
+
+	st.pop();
+
+	st.display();
+}
