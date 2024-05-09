@@ -1,0 +1,105 @@
+#include <iostream>
+using namespace std;
+class priorityQueue {
+	int size, front, rear;
+	int* arr;
+public:
+	priorityQueue(int s) :size(s), front(-1), rear(-1) {
+		arr = new int[size];
+	}
+	void enque(int x) {
+		if (rear == size - 1) {
+			cout << "Priority queue is full" << endl;
+			return;
+		}
+		arr[++rear] = x;
+		if (front == -1) {
+			front++;
+		}
+		int i = rear;
+		
+			while (rear > front && arr[rear] == arr[rear - 1]) {
+				swap(arr[rear], arr[rear - 1]);
+				i--;
+			}
+	}
+	int is_top1() {
+		if (front == -1) {
+			cout << "Priority queue is empty" << endl;
+			return -1;
+		}
+		return arr[front];
+	}
+	void showQueue() {
+		if (front == -1) {
+			cout << "Priority queue is empty" << endl;
+			return;
+		}
+		else {
+			for (int i = front; i <= rear; i++) {
+				cout << arr[i] << "\t";
+			}
+		}
+	}
+}p(5); // object declaration;
+
+class stack {
+	int size, top;
+	int* ary;
+public:
+	stack(int s) :size(s), top(-1) {
+		ary = new int[size];
+	}
+	void push(int v) {
+		if (top == size - 1) {
+			cout << "Error: Overflow. " << endl;
+			return;
+		}
+		ary[++top] = v;
+	}
+	int is_top() {
+		if (top == -1) {
+			cout << "Error: Underflow. " << endl;
+			return -1;
+		}
+		return ary[top];
+	}
+	void showStack() {
+		if (top == -1) {
+			cout << "Erroe: Underflow." << endl;
+		}
+		else {
+			for (int i = top; i >= 0; i--) {
+				cout << ary[i] << "\t";
+			}
+		}
+	}
+}st(5); // object declaration;
+int main() {
+	
+	cout << "For Queue: " << endl;
+	p.enque(10);
+	p.enque(11);
+	p.enque(12);
+	p.showQueue();
+	cout << "\nThe element at the top is: " << p.is_top1() << endl << endl;
+
+	cout << "For Stack: " << endl;
+	st.push(15);
+	st.push(4);
+	st.push(5);
+	st.showStack();
+
+	cout << "\nThe element at the top of the stack is: " << st.is_top() << endl;
+
+	if (st.is_top() < p.is_top1()) {
+		cout << "Pushing the integer 15 onto the stack" << endl;
+		st.push(15);
+		st.showStack();
+	}
+	else {
+		cout << "Push 10:" << endl;
+		p.enque(10);
+	}
+}
+
