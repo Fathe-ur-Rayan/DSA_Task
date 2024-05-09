@@ -1,0 +1,117 @@
+#include<iostream>
+using namespace std;
+class structure {
+private:
+	int top, size;
+	char* arr;
+	int rear, front;
+	char* ary;
+public:
+	structure(int s) :top(-1), rear(-1), front(-1), size(s) {
+		arr = new char[size];
+		ary = new char[size];
+	}
+	~structure()
+	{
+		delete[] arr;
+		delete[] ary;
+	}
+	bool isempty() {
+		return top == -1;
+	}
+	bool isfull() {
+		return top == size-1;
+	}
+	void push(int value) {
+		if (isfull()) {
+			cout << "Error: overflow.";
+		}
+		else
+		{
+			arr[++top] = value;
+		}
+	}
+	int pop() {
+		if (isfull()) {
+			cout << "Error: underflow";
+		}
+		else
+		{
+			int value = arr[top--];
+			return value;
+		}
+	}
+
+	void enqueue(int v) {
+		if (rear == size -1) {
+			cout << "Error: underflow.";
+		}
+		ary[++rear] = v;
+		if (front == -1) {
+			front ++;
+		}
+	}
+	void dequeue() {
+		if (front > rear) {
+			cout << "Error: overflow";
+		}
+		front++;
+		
+	}
+	void show() {
+		cout << "\nFor stack.\n";
+		if (isfull())
+		{
+			cout << "Error: stack underflow." << endl;
+		}
+		else
+		{
+			for (int i = top; i > -1; --i) {
+				cout << arr[i] << "\t";
+			}
+			cout << endl;
+		}
+
+		cout << "For queue.\n";
+		if (front == -1) {
+			cout << "Error: queue is empty" << endl;
+			return;
+		}
+		for (int i = front; i <= rear; ++i) {
+			cout << ary[i] << "\t";
+		}
+		cout << endl;
+	}
+}s(20); // object declaration;
+int main() {
+
+	cout << "\nOrignial list.";
+
+	s.push('A');
+	s.push('B');
+	s.push('C');
+	s.push('D');
+	s.push('E');
+	s.push('F');
+	s.push('G');
+	
+	s.enqueue('W');
+	s.enqueue('X');
+	s.enqueue('Y');
+	s.enqueue('Z');
+	
+	s.show();
+
+	cout << "\nAfter removing elements.";
+	s.pop();
+	s.pop();
+	s.pop();
+	s.dequeue();
+	s.dequeue();
+	s.show();
+
+	cout << "\nagain adding elements.";
+	s.push('G');
+	s.enqueue('V');
+	s.show();
+}
